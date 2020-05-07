@@ -58,7 +58,7 @@ ingress:
 
 lightstep:
   #Input your Satellite API Key
-  satelliteKey: ""
+  satelliteKey: "eyJhbGciOiJIUzI1NiIsImtpZCI6IjIwMTktMDMtMDEiLCJ0eXAiOiJKV1QifQ.eyJzY29wZSI6eyJjb2xsZWN0b3IiOnsicmVhZHdyaXRlIjp0cnVlfX0sImF1ZF9pZCI6IjEyOWY2ZWIzNGE3ZGJjZDcxZTI2NDM1Yzc4OSIsImF1ZCI6IkxpZ2h0U3RlcCIsImV4cCI6MTYxNzIxMjYzNiwianRpIjoiam4zN3RudWtoanZ1cWJ3aGF0NHZuYXlkd2FqMmJhbnNndHBtdmkzNjdpd3c2cjNmIiwiaWF0IjoxNTg1Njc2NjM2LCJpc3MiOiJsaWdodHN0ZXAuY29tIn0.BKldOad7ZDd0qkqJFJiTsofS5VtpI90P3VRjerAtqfA"
   #If you're using an existing secret, enter the name and key of the secret that stores your satellite API key.  Your existing secret should match this pattern, 
   # $ kubectl describe secret collector_satellite_key_secret_name
   # Name:         collector_satellite_key_secret_name
@@ -103,3 +103,14 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+statsd:
+    enabled: true
+    host: 127.0.0.1
+    port: 8125
+    export_statsd: true                               #If true, dogStatsD will be ignored
+    prefix: "lightstep.prod.us-west-1"
+    satellite_prefix: "satellite-canary"
+    client_prefix: "client_via_canary"
+    dogStatsD: false                                  #If true, will output dogStatsD instead of statsD
+    dogStatsDTags: "pool:us-west-1,canary:true"
